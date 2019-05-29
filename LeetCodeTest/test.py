@@ -4,73 +4,30 @@ from string import ascii_lowercase
 from collections import Counter
 
 class Solution():
-    def numRookCaptures(self, board):
-        """
-        :type board: List[List[str]]
-        :rtype: int
-        """
-        row = None
-        col = None
+    def matrixReshape(self, nums, r, c):
+        row = len(nums)
+        col = len(nums[0])
 
-        for i in range(len(board)):
-            if "R" in board[i]:
-                row = i
-                break
-        col = board[row].index("R")
+        tmp = []
+        res = [[0 for i in range(c)] for j in range(r)]
 
-        count = 0
-        for i in board[row][col + 1 :]:
-            if i == '.':
-                pass
-            elif i == 'B':
-                break
-            elif i == 'p':
-                count += 1
-                break
+        for i in range(row):
+            for j in range(col):
+                tmp.append(nums[i][j])
 
-        for i in board[row][col - 1 :: -1]:
-            if i == '.':
-                pass
-            elif i == 'B':
-                break
-            elif i == 'p':
-                count += 1
-                break
+        for i in range(r):
+            for j in range(c):
+                res[i][j] = tmp[0]
+                del tmp[0]
 
-        s = ''.join(i[col] for i in board)
+        return res
 
-        pos = s.index("R")
 
-        for x in s[pos + 1 :]:
-            if x == '.':
-                pass
-            elif x == 'B':
-                break
-            elif x == 'p':
-                count += 1
-                break
-
-        for x in s[pos - 1 :: -1]:
-            if x == '.':
-                pass
-            elif x == 'B':
-                break
-            elif x == 'p':
-                count += 1
-                break
-        return count
 def main():
     test = Solution()
-    board = [[".",".",".",".",".",".",".","."],
-             [".",".",".","p",".",".",".","."],
-             [".",".",".","R",".",".",".","p"],
-             [".",".",".",".",".",".",".","."],
-             [".",".",".",".",".",".",".","."],
-             [".",".",".","p",".",".",".","."],
-             [".",".",".",".",".",".",".","."],
-             [".",".",".",".",".",".",".","."]]
-
-    print(test.numRookCaptures(board))
+    nums = [[1, 2, 3],
+            [4, 5, 6]]
+    print(test.matrixReshape(nums, 6, 1))
 
 if __name__ == '__main__':
     main()
