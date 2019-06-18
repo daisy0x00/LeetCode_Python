@@ -1,4 +1,5 @@
 #coding:utf-8
+# 解题思路：先排序，找两端原数组与排序后数组不同的两端，left从最左端开始，right从右端开始到left + 1结束，最后返回right - left + 1
 
 class Solution():
     def findUnsortedSubarray(self, nums):
